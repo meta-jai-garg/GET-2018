@@ -21,9 +21,12 @@ public class FirstComeFirstServe {
         completionTime = calculateCompletionTime(processes);
         turnAroundTime = calculateTurnAroundTime(processes, completionTime);
         waitingTime = calculateWaitingTime(processes, turnAroundTime);
-
-
-
+        
+        System.out.format("\n%-10s %-10s %-15s %-15s %-15s\n", "Arrival", "Burst", "Completion", "TurnAround", "Waiting");
+        for (int i = 0; i < processes.length; i++) {
+            System.out.format("\n%-10s %-10s %-15s %-15s %-15s\n", processes[i][0], processes[i][1], completionTime[i], turnAroundTime[i], waitingTime[i]);
+        }
+        
         int totalWaitingTime = 0;
         for (int i = 0; i < waitingTime.length; i++) {
             totalWaitingTime += waitingTime[i];
