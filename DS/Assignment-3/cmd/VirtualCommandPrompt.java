@@ -1,0 +1,200 @@
+package cmd;
+
+import java.util.*;
+
+public class VirtualCommandPrompt {
+    static List<Directory> listOfDirectory = new ArrayList<Directory>();
+    static String path = ".\\";
+
+
+    /**
+     * method to implement the virtual command prompt
+     */
+    public static void virtualCommandPrompt() {
+        Directory root = new Directory("R:", new Date());
+        listOfDirectory.add(root);
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("***Welcome to Virtual Command Prompt***");
+        String signature = "R:\\";
+        System.out.print(signature + ">");
+        Directory currentDirectory = root;
+
+        while (true) {
+            String commandLine = scanner.nextLine();
+            String[] commandWords = commandLine.split(" ");
+
+            switch (commandWords[0]) {
+
+                //command to create a directory in the current directory
+                case "mkdir":
+                    if (commandWords.length >= 2) {
+                        boolean flag = false;
+                        for (Directory directory : currentDirectory.getSubDirectoryList()) {
+                            if (directory.getName().equals(commandWords[1])) {
+                                flag = true;
+                                break;
+                            }
+                        }
+                        if (!flag) {
+                            Directory newDirectory = new Directory(commandWords[1], new Date());
+                            listOfDirectory.add(newDirectory);
+                            currentDirectory.getSubDirectoryList().add(newDirectory);
+                        } else
+                            System.out.println(signature + ">A directory " + commandWords[1] + " already exists.");
+                    } else
+                        System.out.println(signature + ">command is incorrect.");
+
+                    System.out.print(signature + ">");
+                    break;
+
+
+                //command to change the current directory				
+                case "cd":
+                    if (commandWords.length >= 2) {
+                        if (findPath(currentDirectory, commandWords[1]) != null) {
+                            for (Directory directory : listOfDirectory) {
+                                if (directory.getName().equals(commandWords[1])) {
+                                    currentDirectory = directory;
+                                    if (signature.charAt(signature.length() - 1) != '\\')
+                                        signature += "\\";
+                                    signature += currentDirectory.getName();
+                                    break;
+                                }
+                            }
+                        } else {
+                            System.out.println(signature + "> directory not exists");
+                        }
+                    } else
+                        System.out.println(signature + ">command is incorrect.");
+
+                    System.out.print(signature + ">");
+                    break;
+
+
+                //command to go back to the parent directory				
+                case "bk":
+                    if (!Objects.equals(currentDirectory.getName(), "R:")) {
+                        String[] directories = signature.split("\\\\");
+                        for (Directory directory : listOfDirectory) {
+                            if (directory.getName().equals(directories[directories.length - 2]))
+                                currentDirectory = directory;
+                        }
+                        signature = "R:";
+                        for (int i = 1; i < directories.length - 1; i++) {
+                            signature += "\\" + directories[i];
+                        }
+                    }
+                    System.out.print(signature + ">");
+                    break;
+
+
+                //command to list all the subfolders in the current directory				
+                case "ls":
+                    for (Directory subDirectory : currentDirectory.getSubDirectoryList()) {
+                        System.out.println(subDirectory.getDateOfCreation() + " " + subDirectory.getName());
+                    }
+                    System.out.println(currentDirectory.getSubDirectoryList().size() + " Folder(s)");
+                    System.out.print(signature + ">");
+                    break;
+
+
+                //command to find the path of an existing directory				
+                case "find":
+                    if (commandWords.length >= 2) {
+                        path = ".\\";
+                        String directoryPath = findPath(currentDirectory, commandWords[1]);
+                        if (directoryPath != null) {
+                            StringBuilder pathToFind = new StringBuilder(directoryPath);
+                            pathToFind.deleteCharAt(pathToFind.length() - 1);
+                            System.out.println(pathToFind);
+                        } else
+                            System.out.println(signature + ">Directory not found");
+                    } else
+                        System.out.println(signature + ">command is incorrect.");
+
+                    System.out.print(signature + ">");
+                    break;
+
+
+                //command to display the tree structure for the current directory				
+                case "tree":
+                    System.out.println(".");
+                    printTree(currentDirectory, 0);
+                    System.out.print(signature + ">");
+                    break;
+
+
+                //command to exit the virtual command prompt				
+                case "exit":
+                    System.exit(0);
+
+
+                    //case when the command is wrong
+                default:
+                    System.out.println(signature + ">Command does not exist");
+                    System.out.print(signature + ">");
+
+            }
+        }
+    }
+
+
+    /**
+     * method to find the path of the given directory
+     *
+     * @param currentDirectory
+     * @param directoryToBeSearched
+     * @return path
+     */
+    private static String findPath(Directory currentDirectory, String directoryToBeSearched) {
+        boolean found = false;
+        if (currentDirectory.getName().equals(directoryToBeSearched)) {
+            found = true;
+        } else {
+            for (Directory directory : currentDirectory.getSubDirectoryList()) {
+                path += directory.getName() + "\\";
+
+                if (findPath(directory, directoryToBeSearched) != null) {
+                    found = true;
+                    break;
+                } else {
+                    String[] directories = path.split("\\\\");
+                    path = ".\\";
+                    for (int i = 1; i < directories.length - 2; i++) {
+                        path += "\\" + directories[i];
+                    }
+                }
+            }
+
+        }
+
+        if (found) {
+            return path;
+        } else
+            return null;
+    }
+
+    /**
+     * method to display the tree of the given directory
+     *
+     * @param currentDirectory
+     * @param nesting          is the level of the subfolder
+     */
+    private static void printTree(Directory currentDirectory, int nesting) {
+        Iterator<Directory> iterator = currentDirectory.getSubDirectoryList().iterator();
+        while (iterator.hasNext()) {
+            for (int i = 0; i < nesting; i++)
+                System.out.print("\u2502    ");
+            Directory subDirectory = iterator.next();
+            if (iterator.hasNext())
+                System.out.println("\u251c\u2500\u2500" + subDirectory.getName());
+            else
+                System.out.println("\u2514\u2500\u2500" + subDirectory.getName());
+
+            if (subDirectory.getSubDirectoryList().size() != 0) {
+                printTree(subDirectory, nesting + 1);
+            }
+        }
+
+    }
+}
