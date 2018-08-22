@@ -1,4 +1,6 @@
-
+/**
+ * POJO to store top category and their sub category count
+ */
 public class CategoryPojo {
 	private String topCategory;
 	private int childCategoryCount;
@@ -19,6 +21,4 @@ public class CategoryPojo {
 		return "CategoryPojo [topCategory=" + topCategory
 				+ ", childCategoryCount=" + childCategoryCount + "]";
 	}
-	
-	
 }
