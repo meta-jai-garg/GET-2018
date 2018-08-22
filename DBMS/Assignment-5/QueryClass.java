@@ -3,11 +3,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QueryClass {
+	/**
+	 * method to find orders correspond to given user id
+	 * 
+	 * @param userId
+	 *            is id of user
+	 * @return list of orders placed by given user
+	 * @throws SQLException
+	 */
 	public List<OrderPojo> orderByUserID(int userId) {
 		if (userId < 0) {
 			System.out.println("Invalid input !!!");
 			System.exit(0);
 		}
+		
+		List<OrderPojo> orderPojo = new ArrayList<OrderPojo>();
 		final String querySelect = "select\r\n"
 				+ "pod.order_id,\r\n"
 				+ "po.order_date,\r\n"
@@ -21,7 +31,7 @@ public class QueryClass {
 				+ "WHERE\r\n" + "pod.status = 'SHIPPED' AND po.user_id = ?\r\n"
 				+ "GROUP BY (pod.order_id)\r\n"
 				+ "ORDER BY (po.order_date) DESC";
-		List<OrderPojo> orderPojo = new ArrayList<OrderPojo>();
+		
 		try (Connection conn = JDBCConnection.getConnection();
 				PreparedStatement stmt = conn.prepareStatement(querySelect);) {
 			stmt.setInt(1, userId);
@@ -40,7 +50,13 @@ public class QueryClass {
 		return orderPojo;
 	}
 
-	public void imageBatchInsert() {
+	/**
+	 * Method to insert image for a product in a batch
+	 * 
+	 * @throws SQLException, BatchUpdateException
+	 */
+	public int imageBatchInsert() {
+		int[] totalInsertion = {};
 		final String queryInsert = "INSERT INTO product_image(img_url, img_name, product_id)VALUES(?,?,?)";
 		try (Connection conn = JDBCConnection.getConnection();
 				PreparedStatement stmt = conn.prepareStatement(queryInsert)) {
@@ -49,11 +65,10 @@ public class QueryClass {
 				for (int index = 1; index <= 5; index++) {
 					stmt.setString(1, "img_url" + index);
 					stmt.setString(2, "img_name" + index);
-					stmt.setInt(3, 22);
+					stmt.setInt(3, 11);
 					stmt.addBatch();
 				}
-				int[] totalInsertion = stmt.executeBatch();
-				System.out.println(totalInsertion.length);
+				totalInsertion = stmt.executeBatch();
 				conn.commit();
 			} catch (BatchUpdateException batch) {
 				System.out.println("Invalid!!!");
@@ -62,8 +77,15 @@ public class QueryClass {
 			e.printStackTrace();
 			System.exit(3);
 		}
+		return totalInsertion.length;
 	}
-	
+
+	/**
+	 * Method to update product state which were not ordered in last 1 year
+	 * 
+	 * @return no of products that are updated.
+	 * @throws SQLException
+	 */
 	public int updateProductState() {
 		int affectedRows = 0;
 		final String queryUpdate = "UPDATE product\r\n"
@@ -84,6 +106,13 @@ public class QueryClass {
 		return affectedRows;
 	}
 
+	/**
+	 * Method to find top categories and count of their child categories.
+	 * 
+	 * @return List of {@code CategoryPojo} sorted alphabetically
+	 * 
+	 * @throws SQLException
+	 */
 	public List<CategoryPojo> categoryTitle() {
 		List<CategoryPojo> categoryPojo = new ArrayList<CategoryPojo>();
 		final String querySelect = "SELECT \r\n"
@@ -91,8 +120,7 @@ public class QueryClass {
 				+ "COUNT(b.category_name) AS 'Category_Count'\r\n" + "FROM\r\n"
 				+ "category a\r\n" + "INNER JOIN\r\n"
 				+ "category b ON a.category_id = b.parent_category\r\n"
-				+ "GROUP BY (a.category_name)\r\n"
-				+ "ORDER BY a.category_name,b.category_name;";
+				+ "GROUP BY (a.category_name)\r\n" + "ORDER BY a.category_name";
 		try (Connection conn = JDBCConnection.getConnection();
 				PreparedStatement stmt = conn.prepareStatement(querySelect);) {
 			ResultSet rSet = stmt.executeQuery();
@@ -102,15 +130,10 @@ public class QueryClass {
 				pojo.setChildCategoryCount(rSet.getInt("Category_Count"));
 				categoryPojo.add(pojo);
 			}
-			System.out.println(categoryPojo.toString());
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.exit(3);
 		}
 		return categoryPojo;
-	}
-
-	public static void main(String[] args) {
-		System.out.println(new QueryClass().updateProductState());
 	}
 }
