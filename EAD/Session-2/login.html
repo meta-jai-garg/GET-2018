@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login</title>
+    <script>
+        function redirectToProfile(){
+            window.location.replace('profile.html');
+            return false;
+        }
+    </script>
+</head>
+<body>
+	<h1 align="center">Enter Your Credentials...</h1>
+    <form onsubmit="return redirectToProfile()">
+        <table align="center">
+            <tr>
+                <td>Email</td>
+                <td><input type="text"  placeholder="Enter Your Email" required></td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td><input type="password" placeholder="Enter Your Password" required></td>
+            </tr>
+            <tr>
+                <td><br><input type="submit" value="Login"></td>
+            </tr>
+        </table>
+    </form>
+	<h3 align="center">Forget Password ??? <a href="" style="text-decoration: none;">Click Here</a></h3>
+</body>
+</html>
