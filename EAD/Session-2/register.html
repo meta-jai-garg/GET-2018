@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Registration</title>
+    <script src="scripts/validateform.js"></script>
+</head>
+
+<body>
+    <h1 align="center">Enter Your Details...</h1>
+    <form action="login.html" onsubmit="return validateForm()">
+        <table align="center">
+            <tr>
+                <td>First Name</td>
+                <td><input type="text" id="firstname" name="firstname"></td>
+            </tr>
+            <tr>
+                <td>Last Name</td>
+                <td><input type="text" id="lastname" name="lastname"></td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td><input type="text" id="email" name="email"></td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td><input type="password" id="password" name="password"></td>
+            </tr>
+            <tr>
+                <td>Confirm Password</td>
+                <td><input type="password" id="confirmpassword" name="confirmpassword"></td>
+            </tr>
+            <tr>
+                <td>Contact Number</td>
+                <td><input type="Number" id="contact" name="contact"></td>
+            </tr>
+            <tr>
+                <td>Company/Institution</td>
+                <td>
+                    <select name="company" id="company">
+                        <option value="Metacube">Metacube</option>
+                        <option value="Infosys">Infosys</option>
+                        <option value="TCS">TCS</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><br><input id="submitBtn" type="submit" value="Submit"></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
