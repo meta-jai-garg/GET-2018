@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Add Employee</title>
+<script src="validate.js"></script>
+</head>
+<body>
+	<form action="AddEmployee" onsubmit="return validateForm()" method="post">
+		<table align="center" cellspacing=15px>
+			<tr>
+				<td>First Name</td>
+				<td><input type="text" id="firstName"name="firstName" placeholder="e.g. John"></td>
+			</tr>
+			<tr>
+				<td>Last Name</td>
+				<td><input type="text" id="lastName" name="lastName"
+					placeholder="e.g. McCarthy"></td>
+			</tr>
+			<tr>
+				<td>Email</td>
+				<td><input type="email" id="email" name="email"
+					placeholder="e.g. user@email.com"></td>
+			</tr>
+			<tr>
+				<td>Age</td>
+				<td><input type="number" id="age" name="age" placeholder="e.g. 23"></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center"><input type="submit"
+					name="submit"></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>
