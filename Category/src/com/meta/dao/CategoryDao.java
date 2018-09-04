@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.meta.model.Category;
@@ -17,48 +17,78 @@ public class CategoryDao {
 		conn = DbUtil.getConnection();
 	}
 
+	/**
+	 * method to add category
+	 * 
+	 * @param category
+	 * @throws SQLException
+	 */
 	public void add(Category category) throws SQLException {
-		PreparedStatement stmt = conn.prepareStatement(CategoryQuery.INSERT_CATEGORY);
+		PreparedStatement stmt = conn
+				.prepareStatement(CategoryQuery.INSERT_CATEGORY);
 		stmt.setString(1, category.getCategoryName());
 		stmt.executeUpdate();
 	}
 
-	public Category get(int id) throws SQLException {
-		Category category = null;
-		PreparedStatement stmt = conn.prepareStatement(CategoryQuery.SELECT_CATEGORY);
+	/**
+	 * method to retrieve category by id
+	 * 
+	 * @param id
+	 *            of category
+	 * @return
+	 * @throws SQLException
+	 */
+	public List<Category> getCategory(int id) throws SQLException {
+		List<Category> list = new ArrayList<Category>();
+		PreparedStatement stmt = conn
+				.prepareStatement(CategoryQuery.SELECT_CATEGORY);
 		stmt.setInt(1, id);
 		ResultSet rSet = stmt.executeQuery();
 		if (rSet.next()) {
-			category = new Category();
+			Category category = new Category();
 			category.setCategoryId(rSet.getInt("categoryId"));
 			category.setCategoryName(rSet.getString("categoryName"));
+			list.add(category);
 		}
-		return category;
+		return list;
 	}
 
-	public List<Category> getAll() throws SQLException {
-		List<Category> categoryList = new LinkedList<>();
-		PreparedStatement stmt = conn.prepareStatement(CategoryQuery.SELECT_ALL_CATEGORY);
+	/**
+	 * method to retrieve all categories
+	 * 
+	 * @return list of {@link Category}
+	 * @throws SQLException
+	 */
+	public List<Category> getCategory() throws SQLException {
+		List<Category> list = new ArrayList<>();
+		PreparedStatement stmt = conn
+				.prepareStatement(CategoryQuery.SELECT_ALL_CATEGORY);
 		ResultSet rSet = stmt.executeQuery();
 		while (rSet.next()) {
 			Category category = new Category();
 			category.setCategoryId(rSet.getInt("categoryId"));
 			category.setCategoryName(rSet.getString("categoryName"));
-			categoryList.add(category);
+			list.add(category);
 		}
-		return categoryList;
+		return list;
 	}
 
-	public boolean setName(int id, String name) throws SQLException {
-		PreparedStatement stmt = conn.prepareStatement(CategoryQuery.UPDATE_CATEGORY);
+	/**
+	 * method to update category name
+	 * 
+	 * @param id
+	 *            of {@link Category}
+	 * @param name
+	 *            of {@link Category}
+	 * @return true when updated successfully
+	 * @throws SQLException
+	 */
+	public boolean updateName(int id, String name) throws SQLException {
+		PreparedStatement stmt = conn
+				.prepareStatement(CategoryQuery.UPDATE_CATEGORY);
 		stmt.setString(1, name);
 		stmt.setInt(2, id);
 		return 1 == stmt.executeUpdate();
 	}
-
-	public boolean remove(int id) throws SQLException {
-		PreparedStatement stmt = conn.prepareStatement(CategoryQuery.DELETE_CATEGORY);
-		stmt.setInt(1, id);
-		return 1 == stmt.executeUpdate();
-	}
+	
 }

@@ -12,6 +12,12 @@ public class DbUtil {
 	private static final String USER = "root";
 	private static final String PASSWORD = "12345";
 
+	/**
+	 * Method to create database connection
+	 * @return {@link Connection} object
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	public static Connection getConnection() throws ClassNotFoundException, SQLException {
 		Class.forName(DB_DRIVER);
 		return DriverManager.getConnection(URL, USER, PASSWORD);
