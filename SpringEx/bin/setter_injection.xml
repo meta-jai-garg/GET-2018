@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<!-- Setter Injection -->
+	<bean id="textEditorSetter" class="com.metacube.training.setter_injection.TextEditor">
+		<property name="spellChecker" ref="spellCheckerSetter" />
+	</bean>
+	<bean id="spellCheckerSetter" class="com.metacube.training.setter_injection.SpellChecker" />
+
+</beans>
