@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<title>Add Employee</title>
+</head>
+
+<body>
+	<form th:action="@{/searchResult}" method="POST">
+		<div th:if="${param.error}" class="alert alert-danger">    
+    		Invalid Data
+		</div>
+			<input name="type" type="radio" value="name" checked/>By Name
+			<br />
+			<input name="type" type="radio" value="skill" />By Skills
+			<br />
+			<input name="type" type="radio" value="project" />By Project
+			<br />
+			<input name="type" type="radio" value="experience" />By Total Experience
+			<br />
+			<input name="input" type="text" required />
+			<br />
+		<input name="submit" type="submit" value="Search" required />
+	</form>
+</body>
+</html>
