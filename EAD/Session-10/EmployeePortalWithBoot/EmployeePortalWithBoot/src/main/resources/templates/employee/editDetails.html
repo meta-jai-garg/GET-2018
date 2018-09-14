@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<title>Edit Details</title>
+</head>
+
+<body>
+	<div>
+		<form action="" method="POST">
+			<div th:object="${employee}">
+				<div class="form-group">
+					<h3>Employee Details</h3>
+					First Name <input name="firstName" type="text"
+						th:field="${employee.firstName}" required readonly /> <br />
+					Last Name <input name="lastName" type="text"
+						th:field="${employee.lastName}" required readonly /> <br /> DOB
+					<input name="dob" type="date" th:field="${employee.dob}" required
+						readonly /> <br /> Email <input name="emailId" type="email"
+						th:field="${employee.emailId}" required readonly/> Primary Contact <input
+						name="primaryContact" type="text"
+						th:field="${employee.primaryContact}" required /> Secondary
+					Contact <input name="secondaryContact" type="text"
+						th:field="${employee.secondaryContact}" /> <br /> <br />
+				</div>
+			</div>
+			<div th:object="${address}">
+				<h3>Address</h3>
+				<div class="form-group">
+					<label>Address : </label> <input name="addLine1" type="text"
+						th:field="${address.addLine1}" required /><br /> <input
+						name="addLine2" type="text" th:field="${address.addLine2}"
+						required /><br />
+				</div>
+				<div class="form-group">
+					<label>City :</label> <input name="city" type="text"
+						th:field="${address.city}" required /><br />
+				</div>
+				<div class="form-group">
+					<label>State :</label> <input name="state" type="text"
+						th:field="${address.state}" required /><br />
+				</div>
+				<div class="form-group">
+					<label>PIN :</label> <input name="pincode" type="text"
+						th:field="${address.pincode}" required /><br />
+				</div>
+			</div>
+			<h3>Skills</h3>
+			<div class="form-group">
+				<select name="skillName" multiple="multiple">
+					<option th:each="skill : ${skills}" th:value="${skill.skillId}"
+						th:inline="text" th:text="${skill.skillName}">[[${skill.skillName}]]</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary">Save</button>
+			</div>
+		</form>
+	</div>
+</body>
+</html>
