@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Employee Profile</title>
+</head>
+<body>
+	<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+	<div
+		class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item active"><a class="nav-link"
+				th:href="@{../search}">Search Employee</a></li>
+		</ul>
+	</div>
+	<div class="mx-auto order-0">
+		<a class="navbar-brand mx-auto" href="#">Employee Portal</a>
+	</div>
+	<div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+		<ul class="navbar-nav ml-auto">
+			<li class="nav-item active "><a class="nav-link"
+				th:href="${'editDetails'}" align='right'>Update Details</a></li>
+			<li class="nav-item active"><a class="nav-link"
+				th:href="@{/employee/login}">Logout</a></li>
+		</ul>
+	</div>
+	</nav>
+	<div align='center' style="margin-top: 50px">
+		<form action="" method="POST">
+			<div th:object="${employee}">
+				<div class="form-group">
+					<br>
+					<h3>Basic Details</h3>
+					<br>
+					<table cellpadding="10px">
+						<tr>
+							<td>First Name</td>
+							<td th:text="${employee.firstName}"></td>
+						</tr>
+						<tr>
+							<td>Last Name</td>
+							<td th:text="${employee.lastName}"></td>
+						</tr>
+						<tr>
+							<td>Date of Birth</td>
+							<td th:text="${employee.dob}"></td>
+						</tr>
+						<tr>
+							<td>Email</td>
+							<td th:text="${employee.emailId}"></td>
+						</tr>
+						<tr>
+							<td>Primary Contact</td>
+							<td th:text="${employee.primaryContact}"></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="form-group">
+				<br>
+				<h3>Skills</h3>
+				<br>
+				<p th:each="skill : ${skills}" th:value="${skill.skillId}"
+					th:inline="text" th:text="${skill.skillName}">[[${skill.skillName}]]</p>
+			</div>
+			<h3>Project Detail</h3>
+			<br>
+			<div th:object="${project}">
+				<table cellpadding="10px">
+					<tr>
+						<td>Project Name</td>
+						<td th:text="${project.description}"></td>
+					</tr>
+					<tr>
+						<td>Reporting Manager</td>
+						<td th:text="${reportingManager}"></td>
+					</tr>
+					<tr>
+						<td>Team Lead</td>
+						<td th:text="${teamLead}"></td>
+					</tr>
+					<tr>
+						<td>End Date</td>
+						<td th:text="${project.endDate}"></td>
+					</tr>
+				</table>
+			</div>
+			<br>
+			<div th:object="${address}">
+				<h3>Address</h3>
+				<br>
+				<div class="form-group">
+					<table cellpadding="10px">
+						<tr>
+							<td>Address Line 1</td>
+							<td th:text="${address.addLine1}"></td>
+						</tr>
+						<tr>
+							<td>Address Line 2</td>
+							<td th:text="${address.addLine2}"></td>
+						</tr>
+						<tr>
+							<td>City</td>
+							<td th:text="${address.city}"></td>
+						</tr>
+						<tr>
+							<td>State</td>
+							<td th:text="${address.state}"></td>
+						</tr>
+						<tr>
+							<td>Pin Code</td>
+							<td th:text="${address.pincode}"></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</form>
+	</div>
+</body>
+</html>
