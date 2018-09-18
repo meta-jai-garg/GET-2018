@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<title>Add Employee</title>
+</head>
+<body>
+	<form th:action="@{../employee}" method="POST">
+		<div th:object="${employee}" style="margin-left: 10px">
+			First Name <input name="firstName" type="text" required /> <br />
+			Last Name <input name="lastName" type="text" required /> <br /> DOB
+			<input name="dob" type="date" required /> <br /> GENDER <input
+				name="gender" type="radio" value="Male" />Male <input name="gender"
+				type="radio" value="Female" />Female <br /> Email <input
+				name="emailId" type="email" required /> Primary Contact <input
+				name="primaryContact" type="number" required /> <br /> <br />
+		</div>
+		<div th:object="${jobDetail}" style="margin-left: 10px">
+			<h2>Job Details</h2>
+			DOJ <input name="dateOfJoining" type="date" required /> <br />
+			Experience <input type="number" name="totalExp" required /> <br />
+			Job Title <select name="jobCode">
+				<option th:each="jobTitle: ${jobTitles}" th:inline="text"
+					th:value="${jobTitle.jobCode}">[[${jobTitle.jobTitle}]]</option>
+			</select> <br /> Current Project <select name="currProjId">
+				<option th:each="currentProject: ${currentProjects}"
+					th:inline="text" th:value="${currentProject.id}">
+					[[${currentProject.description}]]</option>
+			</select> <br /> Reporting Manager <select name="reportingManager">
+				<option th:each="manager: ${reportingManagers}" th:inline="text"
+					th:value="${manager.empCode}">[[${manager.firstName}]]</option>
+			</select> <br /> TeamLead <select name="teamLead">
+				<option th:each="teamLead: ${teamLeads}" th:inline="text"
+					th:value="${teamLead.empCode}">[[${teamLead.firstName}]]</option>
+			</select> <br />
+		</div>
+		<div class="form-group">
+			<h3>Skills</h3>
+			<select name="skillName" multiple="multiple">
+				<option th:each="skill : ${skills}" th:value="${skill.skillId}"
+					th:inline="text" th:text="${skill.skillName}">[[${skill.skillName}]]</option>
+			</select>
+		</div>
+		<div th:object="${address}" style="margin-left: 10px">
+			<h3>Address</h3>
+			<div class="form-group">
+				<label>Address : </label><br>
+				<input name="addLine1" type="text" placeholder="House No./Flat No./etc" required /><br>
+				<input name="addLine2" type="text" placeholder="Colony" required /><br />
+				<input name="city" type="text" placeholder="eg. Jaipur" required><br>
+				<input name="state" type="text" placeholder="eg. Rajasthan" required><br>
+				<input name="pincode" type="number" placeholder="eg. 302038" required><br>
+			</div>
+		</div>
+		<input name="submit" type="submit" value="Submit" style="margin-left: 10px" required />
+	</form>
+</body>
+</html>
