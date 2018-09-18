@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<title>Employees</title>
+</head>
+<body>
+	<div class="container" align="center">
+		<div th:if="${not #lists.isEmpty(employees)}">
+			<h2>All employees</h2>
+			<table class="table table-striped" cellspacing='20px'>
+				<tr align="left">
+					<th>EmployeeCode</th>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>DoB</th>
+					<th>Gender</th>
+					<th>Primary Contact</th>
+					<th>Email</th>
+					<th>Status</th>
+				</tr>
+				<tr th:each="employee : ${employees}">
+					<td th:text="${employee.empCode}">Employee Code</td>
+					<td th:text="${employee.firstName}">First Name</td>
+					<td th:text="${employee.lastName}">Last Name</td>
+					<td th:text="${employee.dob}">DoB</td>
+					<td th:text="${employee.gender}">Gender</td>
+					<td th:text="${employee.primaryContact}">Primary Contact</td>
+					<td th:text="${employee.emailId}">Email</td>
+					<td th:if="${employee.isActive}"><a th:href="${'employee/disable?id=' + employee.empCode}"
+						class="btn btn-danger">Disable</a></td>
+					<td th:if="!${employee.isActive}"><a th:href="${'employee/enable?id=' + employee.empCode}"
+						class="btn btn-success">Enable</a></td>
+				</tr>
+			</table>
+		</div>
+		<a th:href="${'employee/add'}" align='center'>Add New Employee</a>
+	</div>
+</body>
+</html>
