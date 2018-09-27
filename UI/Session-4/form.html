@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    Form
+  </title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+  <link rel="stylesheet" href="styles/form.css">
+</head>
+
+<body>
+
+  <div>
+
+    <h2>Contact Us Today!</h2>
+
+    <form class="application-form" action="#">
+
+      <div class="input-container">
+        <label for="firstName">First Name</label>
+        <i class="fa fa-user icon"></i>
+        <input class="input-field" type="text" id="firstName" placeholder="First Name" name="firstName" pattern="[a-zA-Z ]+" required />
+      </div>
+
+      <div class="input-container">
+        <label for="lastName">Last Name</label>
+        <i class="fa fa-user icon"></i>
+        <input class="input-field" type="text" id="lastName" placeholder="Last Name" name="lastName" pattern="[a-zA-Z ]+" required>
+      </div>
+
+      <div class="input-container">
+        <label for="email">Email</label>
+        <i class="fa fa-envelope icon"></i>
+        <input class="input-field" id="email" type="email" placeholder="E-Mail Address" name="email" required>
+      </div>
+
+      <div class="input-container">
+        <label for="phone">Phone #</label>
+        <i class="fa fa-phone icon"></i>
+        <input class="input-field" id="phone" type="number" placeholder="(845)555-1212" name="phone" pattern="[0-9]+" required>
+      </div>
+
+      <div class="input-container">
+        <label for="address">Address</label>
+        <i class="fa fa-home icon"></i>
+        <input type="text" id="address" placeholder="Address" name="address" required>
+      </div>
+
+      <div class="input-container">
+        <label for="city">City</label>
+        <i class="fa fa-home icon"></i>
+        <input type="text" id="city" pattern="[a-zA-Z ]+" placeholder="City" name="city" required>
+      </div>
+
+      <div class="input-container">
+        <label for="state">State</label>
+        <i class="fa fa-list icon"></i>
+        <select name="state" id="state" required>
+          <option value="" selected disabled hidden>Please select your state</option>
+          <option value="Rajasthan">Rajasthan</option>
+          <option value="Uttar Pradesh">Uttar Pradesh</option>
+          <option value="Maharashtra">Maharashtra</option>
+          <option value="Jammu & Kashmir">Jammu &amp; Kashmir</option>
+        </select>
+      </div>
+
+      <div class="input-container">
+        <label for="zipCode">Zip-Code</label>
+        <i class="fa fa-home icon"></i>
+        <input type="number" id="zipCode" pattern="[0-9]+" placeholder="Zip Code" name="ZipCode" required>
+      </div>
+
+      <div class="input-container">
+        <label for="website">Website or Domain name</label>
+        <i class="fa fa-globe-americas icon"></i>
+        <input type="text" id="website" pattern="https://.*" placeholder="Website or Domain name" name="domain" required>
+      </div>
+
+      <div class="input-container">
+        <label>Do you have hosting</label>
+        <div id="radio">
+          <input type="radio" name="hosting" value="Yes"> Yes<br>
+          <input type="radio" name="hosting" value="No" checked> No<br>
+        </div>
+      </div>
+
+      <div class="input-container">
+        <label for="description">Project Description</label>
+        <i class="fa fa-pencil-alt icon"></i>
+        <textarea rows="4" cols="24" id="description" name="Description" placeholder="Project Description" required></textarea>
+      </div>
+
+      <button type="submit" value="Send">Send <i class="fas fa-location-arrow"></i></button>
+
+    </form>
+
+  </div>
+  
+</body>
+
+</html>
