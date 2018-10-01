@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+  <path d="M50,10 A1,1 0 0,1 50,90" fill="#979B9C" />
+  <path d="M50,20 A1,1 0 0,1 50,80" fill="#FFF" />
+  <path d="M50,10 A1,1 0 0,0 50,90" fill="#2E94D1" />
+</svg>
