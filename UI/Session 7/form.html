@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    Form
+  </title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+  <link rel="stylesheet" href="styles/default.css">
+</head>
+
+<body>
+
+  <div>
+
+    <h2>Contact Us Today!</h2>
+
+    <form class="application-form" action="result.html" onsubmit="return formValidate()">
+      <div id="myForm">
+        <div class="input-container">
+          <label for="firstName">First Name</label>
+          <i class="fa fa-user icon"></i>
+          <input class="input-field" type="text" id="firstName" placeholder="First Name" name="First Name" />
+        </div>
+
+        <div class="input-container">
+          <label for="lastName">Last Name</label>
+          <i class="fa fa-user icon"></i>
+          <input class="input-field" type="text" id="lastName" placeholder="Last Name" name="Last Name" />
+        </div>
+
+        <div class="input-container">
+          <label for="email">Email</label>
+          <i class="fa fa-envelope icon"></i>
+          <input class="input-field" id="email" type="text" placeholder="E-Mail Address" name="email">
+        </div>
+
+        <div class="input-container">
+          <label for="phone">Phone #</label>
+          <i class="fa fa-phone icon"></i>
+          <input class="input-field" id="phone" type="text" placeholder="(845)555-1212" name="phone" />
+        </div>
+
+        <div class="input-container">
+          <label for="address">Address</label>
+          <i class="fa fa-home icon"></i>
+          <input type="text" id="address" placeholder="Address" name="Address" />
+        </div>
+
+        <div class="input-container">
+          <label for="city">City</label>
+          <i class="fa fa-home icon"></i>
+          <input type="text" id="city" placeholder="City" name="City" />
+        </div>
+
+        <div class="input-container">
+          <label for="state">State</label>
+          <i class="fa fa-list icon"></i>
+          <select name="State" id="state" onchange="showDiv(this)">
+            <option value="" selected disabled hidden>Please select your state</option>
+            <option value="Rajasthan">Rajasthan</option>
+            <option value="Haryana">Haryana</option>
+            <option value="Maharashtra">Maharashtra</option>
+          </select>
+        </div>
+
+      </div>
+      <button type="submit" value="Send">Send <i class="fas fa-location-arrow"></i></button>
+
+    </form>
+  </div>
+  <script src="js/formValidation.js"></script>
+
+</body>
+
+</html>
