@@ -1,0 +1,52 @@
+<div>
+    <h2>Shopping-Cart</h2>
+
+    <div class="row" ng-if="cart.getCartCount()>0">
+        <div class="card px-0 col-8 my-4">
+
+            <div class="card-header py-0 bg-transparent d-flex align-items-center justify-content-between">
+                <p class="col-md-4 my-4">You have {{cart.getCartCount()}} items in you cart</p>
+                <button class="btn btn-light btn-md col-md-3" ng-click="cart.empty()">Clear Shopping cart</button>
+            </div>
+
+            <div class="card-body">
+                <div class="row border-bottom">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3 text-center">
+                        <p class="font-weight-bold">Product</p>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <p class="font-weight-bold">Quantity</p>
+                    </div>
+                    <div class="col-md-2 text-center">
+                        <p class="font-weight-bold">Price</p>
+                    </div>
+                </div>
+                <div class="row align-items-center my-4 border-bottom px-0" ng-repeat="item in cart.getItem()">
+                    <div class="col-md-3 my-2"><img ng-src="{{items[item.id].image}}" class="rounded-circle" height="100px"
+                            width="100px"></div>
+                    <div class="col-md-3 text-center">
+                        <p>{{items[item.id].name}}</p>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <a ng-click="cart.remove(item.id)" class="btn btn-secondary mx-2 text-white font-weight-bold">-</a>
+                        {{cart.getQuantity(item.id)}} in cart
+                        <a ng-click="cart.insert(item.id)" class="btn btn-secondary mx-2 text-white font-weight-bold">+</a>
+                    </div>
+                    <div class="col-md-2 text-center">
+                        <p>{{cart.getQuantity(item.id) * items[item.id].price | currency}}</p>
+                    </div>
+                </div>
+                <div class="row d-flex text-center border-bottom">
+                    <div class="col-md-2 ml-auto">
+                        <p>{{cart.getTotalPrice() | currency}}</p>
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <a class="btn btn-primary" href="#!/check-out">Check Out</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p ng-if="cart.getCartCount() <=0 "> Your cart is empty. </p>
+</div>

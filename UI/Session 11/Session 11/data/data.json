@@ -1,0 +1,82 @@
+{
+  "cart": [],
+  "items": [
+    {
+      "id": 1,
+      "name": "White Bread",
+      "image": "images/white-bread.jpg",
+      "price": 3,
+      "category": "bread"
+    },
+    {
+      "id": 2,
+      "name": "Brown Bread",
+      "image": "images/brown-bread.jpg",
+      "price": 4,
+      "category": "bread"
+    },
+    {
+      "id": 3,
+      "name": "Milk",
+      "image": "images/milk.jpg",
+      "price": 2.5,
+      "category": "dairy"
+    },
+    {
+      "id": 4,
+      "name": "Cheese",
+      "image": "images/cheese.jpg",
+      "price": 3.5,
+      "category": "dairy"
+    },
+    {
+      "id": 5,
+      "name": "Mango",
+      "image": "images/mango.jpg",
+      "price": 2,
+      "category": "fruit"
+    },
+    {
+      "id": 6,
+      "name": "Apple",
+      "image": "images/apple.jpg",
+      "price": 1.5,
+      "category": "fruit"
+    },
+    {
+      "id": 7,
+      "name": "Saffron",
+      "image": "images/saffron.jpg",
+      "price": 7.5,
+      "category": "Spices and Seasonings"
+    },
+    {
+      "id": 8,
+      "name": "Cinnamon Sticks",
+      "image": "images/cinnamon.jpg",
+      "price": 1.5,
+      "category": "Spices and Seasonings"
+    },
+    {
+      "id": 9,
+      "name": "Potato",
+      "image": "images/potato.jpg",
+      "price": 0.5,
+      "category": "vegetables"
+    },
+    {
+      "id": 10,
+      "name": "Tomato",
+      "image": "images/tomato.jpg",
+      "price": 0.75,
+      "category": "vegetables"
+    }
+  ],
+  "categories": [
+    "Bread",
+    "Dairy",
+    "Fruit",
+    "Spices and Seasonings",
+    "Vegetables"
+  ]
+}
