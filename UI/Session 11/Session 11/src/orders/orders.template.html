@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="row border-bottom">
+        <p class="display-4">Orders</p>
+    </div>
+    <div class="row border-bottom d-flex justify-content-around align-items-center py-2">
+        <p class="col-md-3 font-weight-bold my-0">Customer</p>
+        <p class="col-md-3 font-weight-bold my-0">Date</p>
+        <div class="col-md-3"></div>
+    </div>
+    <div class="row border-bottom d-flex justify-content-around align-items-center py-2" ng-repeat="or in orders">
+        <p class="col-md-3 my-0">{{or.name}}</p>
+        <p class="col-md-3 my-0">{{or.date}}</p>
+        <div class="col-md-3 my-0">
+            <button class="btn btn-link" data-toggle="modal" data-target="#orderModal" ng-click="orderData.getOrder(or.id)">
+                View
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" id="orderModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">Order Summary</h4>
+                <button class="btn btn-link btn-lg" type="button" class="close" data-dismiss="modal" arial-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body mx-3">
+                <div class="row d-flex justify-content-between border-bottom" ng-repeat="item in orderData.getOrderDetail()">
+                    <div class="col-md-4">
+                        <p>{{orderData.getQuantity($index)}} x {{items[item.id].name}}</p>
+                    </div>
+                    <div class="col-md-2">
+                        <p>${{items[item.id].price | number:2}}</p>
+                    </div>
+                </div>
+                <div class="row d-flex justify-content-between">
+                    <div class="col-md-3">
+                        <p class="font-weight-bold">Total</p>
+                    </div>
+                    <div class="col-md-2">
+                        <p class="font-weight-bold">{{orderData.getTotalPrice() | currency}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html ng-app="GroceryStore">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Grocery Store</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
+    <script src="https://code.angularjs.org/1.7.5/angular-route.min.js"></script>
+    <script src="src/app.js"></script>
+    <script src="src/item/item.service.js"></script>
+    <script src="src/item/items.controller.js"></script>
+    <script src="src/shopping-cart/cart.service.js"></script>
+    <script src="src/shopping-cart/cart.controller.js"></script>
+    <script src="src/header/header.controller.js"></script>
+    <script src="src/check-out/check-out.service.js"></script>
+    <script src="src/check-out/check-out.controller.js"></script>
+    <script src="src/orders/orders.service.js"></script>
+    <script src="src/orders/orders.controller.js"></script>
+</head>
+
+<body class="container-fluid">
+    <div ng-controller="headerController">
+        <header class="row shadow-sm p-3 mb-5 pl-5 bg-white rounded">
+            <div class="col-6 ">
+                <a href="#!/"><i class="fa fa-leaf"></i></a>
+                <a href="#!/shopping-cart"><i class="fa fa-shopping-cart  ml-2"></i><span class="badge badge-warning rounded-circle ml-1 text-white">{{cart.getCartCount()}}</span></a>
+            </div>
+            <div class="col-6">
+                <div class="dropdown">
+                    <span class="dropdown-toggle float-right pr-5" id="dropdownMenuButton" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">John Doe</span>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#!/admin/orders">My Orders</a>
+                        <a class="dropdown-item" href="#!/">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+    <section ng-view></section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</body>
+
+</html>
